@@ -3,20 +3,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Module dependencies.
  */
-const express = require("express");
+const path = require("path"); //
+const express = require("express"); // web framework for node
 const compression = require("compression"); // compresses requests
-const session = require("express-session");
-const bodyParser = require("body-parser");
-const logger = require("morgan");
-const errorHandler = require("errorhandler");
-const lusca = require("lusca");
-const dotenv = require("dotenv");
-const mongo = require("connect-mongo");
-const flash = require("express-flash");
-const path = require("path");
-const mongoose = require("mongoose");
-const passport = require("passport");
-const expressValidator = require("express-validator");
+const session = require("express-session"); // Simple session middleware for Express
+const bodyParser = require("body-parser"); // body parsing middleware
+const logger = require("morgan"); // HTTP request logger middleware for node.js
+const errorHandler = require("errorhandler"); // Development-only error handler middleware
+const lusca = require("lusca"); // Application security for express apps
+const dotenv = require("dotenv"); // Loads environment variables from .env for nodejs projects
+const mongo = require("connect-mongo"); // MongoDB session store for Express and Connect
+const flash = require("express-flash"); // Flash Messages for your Express Application
+const mongoose = require("mongoose"); // MongoDB object modeling designed to work in an asynchronous environment
+const passport = require("passport"); // Simple, unobtrusive authentication for Node.js
+const expressValidator = require("express-validator"); // An express.js middleware for node-validator
 const MongoStore = mongo(session);
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -45,6 +45,9 @@ mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
 mongoose.connection.on("error", () => {
     console.log("MongoDB connection error. Please make sure MongoDB is running.");
     process.exit();
+});
+mongoose.connection.on("connected", () => {
+    console.log("Mongoose default connection open to " + process.env.MONGODB_URI || process.env.MONGOLAB_URI);
 });
 /**
  * Express configuration.
@@ -90,6 +93,9 @@ app.use((req, res, next) => {
     }
     next();
 });
+/**
+ * static resource
+ */
 app.use(express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }));
 /**
  * Primary app routes.

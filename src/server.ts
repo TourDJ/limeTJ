@@ -1,20 +1,20 @@
 /**
  * Module dependencies.
  */
-import * as express from "express";
-import * as compression from "compression";  // compresses requests
-import * as session from "express-session";
-import * as bodyParser from "body-parser";
-import * as logger from "morgan";
-import * as errorHandler from "errorhandler";
-import * as lusca from "lusca";
-import * as dotenv from "dotenv";
-import * as mongo from "connect-mongo";
-import * as flash from "express-flash";
-import * as path from "path";
-import * as mongoose from "mongoose";
-import * as passport from "passport";
-import expressValidator = require("express-validator");
+import * as path from "path";                 //
+import * as express from "express";           // web framework for node
+import * as compression from "compression";   // compresses requests
+import * as session from "express-session";   // Simple session middleware for Express
+import * as bodyParser from "body-parser";    // body parsing middleware
+import * as logger from "morgan";             // HTTP request logger middleware for node.js
+import * as errorHandler from "errorhandler"; // Development-only error handler middleware
+import * as lusca from "lusca";               // Application security for express apps
+import * as dotenv from "dotenv";             // Loads environment variables from .env for nodejs projects
+import * as mongo from "connect-mongo";       // MongoDB session store for Express and Connect
+import * as flash from "express-flash";       // Flash Messages for your Express Application
+import * as mongoose from "mongoose";         // MongoDB object modeling designed to work in an asynchronous environment
+import * as passport from "passport";         // Simple, unobtrusive authentication for Node.js
+import expressValidator = require("express-validator"); // An express.js middleware for node-validator
 
 
 const MongoStore = mongo(session);
@@ -53,6 +53,10 @@ mongoose.connection.on("error", () => {
   process.exit();
 });
 
+mongoose.connection.on("connected", () => {
+  console.log("Mongoose default connection open to " + process.env.MONGODB_URI || process.env.MONGOLAB_URI);
+});
+
 
 
 /**
@@ -61,6 +65,7 @@ mongoose.connection.on("error", () => {
 app.set("port", process.env.PORT || 3000);
 app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "pug");
+
 app.use(compression());
 app.use(logger("dev"));
 app.use(bodyParser.json());
@@ -80,10 +85,12 @@ app.use(passport.session());
 app.use(flash());
 app.use(lusca.xframe("SAMEORIGIN"));
 app.use(lusca.xssProtection(true));
+
 app.use((req, res, next) => {
   res.locals.user = req.user;
   next();
 });
+
 app.use((req, res, next) => {
   // After successful login, redirect back to the intended page
   if (!req.user &&
@@ -98,6 +105,10 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+/**
+ * static resource
+ */
 app.use(express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }));
 
 /**
