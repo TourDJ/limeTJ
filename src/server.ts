@@ -31,6 +31,7 @@ import * as homeController from "./controllers/home";
 import * as userController from "./controllers/user";
 import * as apiController from "./controllers/api";
 import * as contactController from "./controllers/contact";
+import * as blogController from "./controllers/blog";
 
 /**
  * API keys and Passport configuration.
@@ -132,10 +133,16 @@ app.post("/account/password", passportConfig.isAuthenticated, userController.pos
 app.post("/account/delete", passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get("/account/unlink/:provider", passportConfig.isAuthenticated, userController.getOauthUnlink);
 
+
+/**
+ * Blogs routes
+ */
+app.get("/blog", blogController.getBlogs);
+
 /**
  * API examples routes.
  */
-app.get("/api", apiController.getApi);
+// app.get("/api", apiController.getApi);
 // app.get("/api/facebook", passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getFacebook);
 
 /**

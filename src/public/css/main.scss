@@ -69,6 +69,9 @@ textarea {
   margin-right: 6px;
 }
 
+.navbar-brand {
+  color: #3F5B7A
+}
 
 .hide {
   display: none;
@@ -76,5 +79,11 @@ textarea {
 
 .logo-brand {
   color: #6BD414;
-  font-size: 20px;
+  font-size: 28px;
+}
+
+#navbar-title {
+  a {
+    size: 20px !important;
+  }
 }
