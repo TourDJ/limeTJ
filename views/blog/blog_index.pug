@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+	.well.well-sm
+		h1 
+			span #{user.profile.name} 
+			span 的博客
+	.row
+		.col-md-8
+			.row
+				.col-lg-6.blog-search
+					input
+				.col-lg-6.blog-add
+					button  写 博 客
+				- for(i = 0; i < 10; i++)
+					.col-lg-12
+						.blog-item ab#{i}
+		.col-md-4
