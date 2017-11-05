@@ -20,3 +20,8 @@ const blogSchema = new mongoose.Schema({
     creator: String,
     labels: Array
 })
+
+
+// export blog model
+const Blog  = mongoose.model('blog', blogSchema)
+export default Blog
