@@ -6,13 +6,30 @@ block content
 			span #{user.profile.name} 
 			span 的博客
 	.row
-		.col-md-8
+		.col-md-10
 			.row
-				.col-lg-6.blog-search
-					input
-				.col-lg-6.blog-add
-					button  写 博 客
+				form.form-inline
+					.col-lg-2.blog-search
+						input.form-control.input-lg(type="text", placeholder="日志标题/主旨")
+					.col-lg-8
+					.col-lg-2.blog-add
+						button.btn.btn-default.btn-lg#btnAddBlog(data-toggle="modal", data-target="#add") 写 博 客
 				- for(i = 0; i < 10; i++)
 					.col-lg-12
 						.blog-item ab#{i}
-		.col-md-4
+		.col-md-2
+	//- .row
+	//- 	.modal.fade#add(tabindex="-1", role="dialog", aria-labelledby="myModalLabel")
+	//- 		.modal-dialog(role="document")
+	//- 			.modal-content
+	//- 				.modal-header
+	//- 					button.close(type="button" data-dismiss="modal" aria-label="Close")
+	//- 						span(aria-hidden="true") &times;
+	//- 					h4.modal-title#myModalLabel Modal title
+	//- 				.modal-body
+	//- 					span abc
+	//- 				.modal-footer
+	//- 					button.btn.btn-primary(type="button") 保 存
+
+block script	
+	script(src="/js/blog.js")

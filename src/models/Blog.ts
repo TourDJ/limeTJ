@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose' 
+import * as mongoose from "mongoose";
 
 export type BlogModel = mongoose.Document & {
     title: string,
@@ -6,12 +6,12 @@ export type BlogModel = mongoose.Document & {
     createDate: Date,
     creator: string,
     labels: LangLabels[]
-}
+};
 
 export type LangLabels = {
     leve: number,
     name: string
-}
+};
 
 const blogSchema = new mongoose.Schema({
     title: String,
@@ -19,9 +19,9 @@ const blogSchema = new mongoose.Schema({
     createDate: Date,
     creator: String,
     labels: Array
-})
+});
 
 
 // export blog model
-const Blog  = mongoose.model('blog', blogSchema)
-export default Blog
+const Blog  = mongoose.model("blog", blogSchema);
+export default Blog;
