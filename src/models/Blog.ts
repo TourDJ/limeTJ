@@ -19,9 +19,10 @@ const blogSchema = new mongoose.Schema({
     createDate: Date,
     creator: String,
     labels: Array
-});
+}, { timestamps: true });
+
 
 
 // export blog model
-const Blog  = mongoose.model("blog", blogSchema);
+const Blog  = mongoose.model("Blog", blogSchema);
 export default Blog;

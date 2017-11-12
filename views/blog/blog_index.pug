@@ -3,8 +3,7 @@ extends ../layout
 block content
 	.well.well-sm
 		h1 
-			span #{user.profile.name} 
-			span 的博客
+			span #{user.profile.name} 的博客
 	.row
 		.col-md-10
 			.row
@@ -13,23 +12,14 @@ block content
 						input.form-control.input-lg(type="text", placeholder="日志标题/主旨")
 					.col-lg-8
 					.col-lg-2.blog-add
-						button.btn.btn-default.btn-lg#btnAddBlog(data-toggle="modal", data-target="#add") 写 博 客
-				- for(i = 0; i < 10; i++)
-					.col-lg-12
-						.blog-item ab#{i}
+						button.btn.btn-default.btn-lg#btnAddBlog(type="button") 写 博 客
+				each blog in blogs
+					.row
+						.blog-title.col-lg-12 
+							span.col-lg-8 #{blog.title}
+							span.col-lg-2 aa
+							span.col-lg-2 bb
+						.blog-content.col-lg-12 #{blog.article}
 		.col-md-2
-	//- .row
-	//- 	.modal.fade#add(tabindex="-1", role="dialog", aria-labelledby="myModalLabel")
-	//- 		.modal-dialog(role="document")
-	//- 			.modal-content
-	//- 				.modal-header
-	//- 					button.close(type="button" data-dismiss="modal" aria-label="Close")
-	//- 						span(aria-hidden="true") &times;
-	//- 					h4.modal-title#myModalLabel Modal title
-	//- 				.modal-body
-	//- 					span abc
-	//- 				.modal-footer
-	//- 					button.btn.btn-primary(type="button") 保 存
-
 block script	
 	script(src="/js/blog.js")

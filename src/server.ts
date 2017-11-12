@@ -138,6 +138,8 @@ app.get("/account/unlink/:provider", passportConfig.isAuthenticated, userControl
  * Blogs routes
  */
 app.get("/blog", blogController.getBlogs);
+app.get("/blog/add", blogController.addBlog);
+app.post("/blog", blogController.saveBlog);
 
 /**
  * API examples routes.

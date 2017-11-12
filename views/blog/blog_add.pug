@@ -1,0 +1,31 @@
+extends ../layout
+
+block content
+	.well.well-sm
+		h1
+			span 写日志
+	.row
+		.col-lg-offset-2.col-lg-8
+			form
+				.form-group
+					label(for="blogTitle") 标题
+					input.form-control#blogTitle(type="text", name="title", placeholder="标题")
+				.form-group
+					label(for="blogContent") 日志内容
+					textarea.form-control#blogContent(name="content", rows="10", placeholder="日志内容")
+				button.btn.btn-primary#btnSaveBlog(type="button") 确定
+block script	
+	script(src="/js/blog.js")
+	//- .row
+	//- 	.modal.fade#add(tabindex="-1", role="dialog", aria-labelledby="myModalLabel")
+	//- 		.modal-dialog(role="document")
+	//- 			.modal-content
+	//- 				.modal-header
+	//- 					button.close(type="button" data-dismiss="modal" aria-label="Close")
+	//- 						span(aria-hidden="true") &times;
+	//- 					h4.modal-title#myModalLabel Modal title
+	//- 				.modal-body
+	//- 					span abc
+	//- 				.modal-footer
+	//- 					button.btn.btn-primary(type="button") 保 存			
+	
