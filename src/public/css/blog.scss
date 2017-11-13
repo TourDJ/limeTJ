@@ -1,11 +1,29 @@
 
-.blog-search {
-    text-align: left;
-    padding-left: 10px;
+
+$blogHeight: 100px;
+$blogColor: rgba(41, 104, 155, 0.5)!default;
+
+
+#blog-search {
+    text-align: center;
 }
 
-.blog-add {
-    text-align: right;
-    padding-left: 10px;
+#blog-add {
+    text-align: center;
 }
 
+.blog-box {
+    margin: {
+        top: 10px;
+        bottom: 10px;
+    }
+    border: 1px solid $blogColor;
+}
+
+.blog-title {
+    height: $blogHeight;
+}
+
+.blog-content {
+    height: $blogHeight * 4;
+}
