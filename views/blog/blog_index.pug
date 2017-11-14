@@ -1,38 +1,32 @@
 extends ../layout
 
 block content
-	.row
-		.well.well-sm
-			h1 
-				span #{user.profile.name} 的博客
-	.row
-		.col-md-10
-			.row
-				form.form-inline
-					.row
-						.col-lg-4
-							.input-group#blog-search
-								input.form-control.input-lg(type="text", placeholder="日志标题/主旨")
-								span.input-group-btn
-									btn.btn.btn-default.btn-lg(type="button") go
-						.col-lg-6
-						.col-lg-2
-							.input-group#blog-add
-								button.btn.btn-default.btn-lg#btnAddBlog(type="button") 写 博 客
-					each blog in blogs
-						.row.blog-box
-							.col-lg-12
-								.blog-title 
-									span.col-lg-8 #{blog.title}
-									span.col-lg-2 aa
-									span.col-lg-2 bb
-							.col-lg-12
-								.blog-content 
-									div.col-lg-12 #{blog.article}
-							.col-lg-12
-								.blog-foot
-									span abc
-		.col-md-2
-			div aaaa
+	.col-lg-12#blog-title
+		h1 
+			span #{user.profile.name} 的博客
+	.col-md-10#blog-left
+		.row
+			form.form-inline
+				.col-lg-4
+					.input-group#blog-search
+						input.form-control.input-lg(type="text", placeholder="日志标题/主旨")
+						span.input-group-btn
+							btn.btn.btn-default.btn-lg(type="button") go
+				.col-lg-6
+				.col-lg-2
+					.input-group#blog-add
+						button.btn.btn-default.btn-lg#btnAddBlog(type="button") 写 博 客
+		each blog in blogs
+			.row.blog-box
+				.blog-title 
+					span.col-lg-8 #{blog.title}
+					span.col-lg-2 aa
+					span.col-lg-2 bb
+				.blog-content 
+					div.col-lg-12 #{blog.article}
+				.blog-foot
+					span.col-lg-12 abc
+	.col-md-2#blog-right
+		div aaaa
 block script	
 	script(src="/js/blog.js")

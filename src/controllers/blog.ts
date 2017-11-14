@@ -33,20 +33,21 @@ export let saveBlog = (req: Request, res: Response, next: NextFunction) => {
 
 	const blog = new Blog({
 		title: title,
-		article: content
+		article: content,
+		createDate: new Date()
 	});
 
-	// if(title && content) {
-	console.log(blog)				
-	// }
-	blog.save((err) => {
-		if (err) { 
-			return next(err); 
-		}
-		console.log(title);
-		console.log(content);	
-		res.redirect("/blog");
-	});
+	if(title && content) {
+		blog.save((err) => {
+			if (err) { 
+				return next(err); 
+			}
+			console.log(title);
+			console.log(content);	
+			res.redirect("/blog");
+		});
+	}
+			
 
 	// res.render("blog/blog_index", {
 	// 	title: "blog index"
