@@ -3,7 +3,13 @@
 import { Response, Request, NextFunction } from "express";
 import mUtils from "../utils/commUtils";
 import { default as Blog, BlogModel, LangLabels } from "../models/Blog";
+import { default as Lang, LangModel } from "../models/Lang";
 
+/**
+ * 
+ * @param req 
+ * @param res 
+ */
 export let getBlogs = async (req: Request, res: Response) => {
 	const user = req.user;
 	let _blogs;
@@ -22,12 +28,34 @@ export let getBlogs = async (req: Request, res: Response) => {
     }
 };
 
-export let addBlog = (req: Request, res: Response) => {
+/**
+ * 
+ * @param req 
+ * @param res 
+ */
+export let addBlog = async (req: Request, res: Response, next: NextFunction) => {
+	let _langs;
+
+	await Lang.find({state: 1}, function(err: Error, langs: LangModel) {
+		if(err)
+			return next(err);
+			
+		if(langs)
+			_langs = langs;
+	});
+
     res.render("blog/blog_add", {
-        title: "add blog"
+		title: "add blog",
+		langs: _langs
     });
 };
 
+/**
+ * 
+ * @param req 
+ * @param res 
+ * @param next 
+ */
 export let saveBlog = (req: Request, res: Response, next: NextFunction) => {
   const { title, content } = req.body;
 
@@ -42,8 +70,7 @@ export let saveBlog = (req: Request, res: Response, next: NextFunction) => {
 			if (err) { 
 				return next(err); 
 			}
-			console.log(title);
-			console.log(content);	
+	
 			res.redirect("/blog");
 		});
 	}
