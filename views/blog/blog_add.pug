@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-	.well.well-sm
+	.col-lg-12#blog-title
 		h1
 			span 写日志
 	.row
@@ -11,11 +11,17 @@ block content
 					label(for="blogTitle") 标题
 					input.form-control#blogTitle(type="text", name="title", placeholder="标题")
 				.form-group
+					label(for="blogDate") 日期
+					input.form-control#datetimepicker(type="text", name="date", placeholder="日期")
+				.form-group
 					label(for="blogLang") 标签
-					.checkbox
-						label
-							input(type="checkbox") 
-							| java
+					.row
+						each lang in langs
+							.col-lg-3
+								.checkbox
+									label
+										input(type="checkbox") 
+										| #{lang}
 				.form-group
 					label(for="blogContent") 内容
 					textarea.form-control#blogContent(name="content", rows="10", placeholder="日志内容")

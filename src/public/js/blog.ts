@@ -11,4 +11,8 @@ $(document).ready(function() {
         .attr({"action": "/blog", "method": "post"})
         .submit();
     });
+
+    $('#datetimepicker').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii'
+    });
 });

@@ -34,9 +34,9 @@ export let getBlogs = async (req: Request, res: Response) => {
  * @param res 
  */
 export let addBlog = async (req: Request, res: Response, next: NextFunction) => {
-	let _langs;
+	let _langs: any, names: Array<String> = [];
 
-	await Lang.find({state: 1}, function(err: Error, langs: LangModel) {
+	await Lang.find({"state": 1}, {langName: 1, _id: 0}, function(err: Error, langs: LangModel) {
 		if(err)
 			return next(err);
 			
@@ -44,9 +44,16 @@ export let addBlog = async (req: Request, res: Response, next: NextFunction) => 
 			_langs = langs;
 	});
 
+	if(_langs && _langs instanceof Array) {
+		_langs.forEach(function(lang) {
+			if(lang && lang._doc)
+				names.push(lang._doc.langName);
+		});
+	}
+
     res.render("blog/blog_add", {
 		title: "add blog",
-		langs: _langs
+		langs: names
     });
 };
 

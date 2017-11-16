@@ -3,26 +3,16 @@ import * as mongoose from "mongoose";
 export type LangModel = mongoose.Document & {
     id: number,
     name: string,
-    state: string
+    state: number
 };
 
 const langSchema = new mongoose.Schema({
     id: Number,
     name: String,
-    state: String
+    state: Number
 });
 
-langSchema.statics.fetch = function(cb: any) {
-    return this
-        .find()
-        .exec(cb);
-};
-
-langSchema.statics.findById = function(id: Number, cb: any) {
-    return this
-        .findOne({_id: id})
-        .exec(cb);
-};
+// static method
 
 const Lang = mongoose.model("Lang", langSchema);
 export default Lang;
