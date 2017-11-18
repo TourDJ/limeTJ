@@ -6,16 +6,18 @@ block content
 			span 写日志
 	.row
 		.col-lg-offset-2.col-lg-8
-			form
+			form.form-horizontal
 				.form-group
-					label(for="blogTitle") 标题
-					input.form-control#blogTitle(type="text", name="title", placeholder="标题")
+					label.col-lg-2.control-label(for="blogTitle") 标题
+					.col-lg-10
+						input.form-control#blogTitle(type="text", name="title", placeholder="标题")
 				.form-group
-					label(for="blogDate") 日期
-					input.form-control#datetimepicker(type="text", name="date", placeholder="日期")
+					label.col-lg-2.control-label(for="blogDate") 日期
+					.col-lg-4
+						input.form-control#datetimepicker(type="text", name="date", placeholder="日期")
 				.form-group
-					label(for="blogLang") 标签
-					.row
+					label.col-lg-2.control-label(for="blogLang") 标签
+					.col-lg-10
 						each lang in langs
 							.col-lg-3
 								.checkbox
@@ -23,9 +25,12 @@ block content
 										input(type="checkbox") 
 										| #{lang}
 				.form-group
-					label(for="blogContent") 内容
-					textarea.form-control#blogContent(name="content", rows="10", placeholder="日志内容")
-				button.btn.btn-primary#btnSaveBlog(type="button") 确定
+					label.col-lg-2.control-label(for="blogContent") 内容
+					.col-lg-10
+						textarea.form-control#blogContent(name="content", rows="10", placeholder="日志内容")
+				.form-group
+					.col-lg-offset-2.col-lg-10
+						button.btn.btn-primary#btnSaveBlog(type="button") 确定
 block script	
 	script(src="/js/blog.js")
 	//- .row
@@ -40,4 +45,3 @@ block script
 	//- 					span abc
 	//- 				.modal-footer
 	//- 					button.btn.btn-primary(type="button") 保 存			
-	

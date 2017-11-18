@@ -111,6 +111,7 @@ app.use((req, res, next) => {
  * static resource
  */
 app.use(express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }));
+app.use(express.static(path.join(__dirname, 'bower_components')));
 
 /**
  * Primary app routes.

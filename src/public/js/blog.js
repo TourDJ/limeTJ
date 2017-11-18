@@ -12,7 +12,5 @@ $(document).ready(function() {
         .submit();
     });
 
-    $('#datetimepicker').datetimepicker({
-        format: 'yyyy-mm-dd hh:ii'
-    });
+
 });
