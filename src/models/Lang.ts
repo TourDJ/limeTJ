@@ -1,14 +1,14 @@
 import * as mongoose from "mongoose";
 
 export type LangModel = mongoose.Document & {
-    id: number,
-    name: string,
+    langId: number,
+    langName: string,
     state: number
 };
 
 const langSchema = new mongoose.Schema({
-    id: Number,
-    name: String,
+    langId: Number,
+    langName: String,
     state: Number
 });
 

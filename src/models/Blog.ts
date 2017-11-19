@@ -1,11 +1,16 @@
 import * as mongoose from "mongoose";
+import LangLabel from "./Lang";
 
 export type BlogModel = mongoose.Document & {
     title: string,
     article: string,
     createDate: Date,
     creator: string,
-    labels: LangLabels[]
+    labels: string,
+    open: number,
+    catalog: number,
+    cntRead: number,
+    cntComment: number
 };
 
 export type LangLabels = {
@@ -18,7 +23,11 @@ const blogSchema = new mongoose.Schema({
     article: String,
     createDate: Date,
     creator: String,
-    labels: Array
+    labels: String,
+    open: Number,
+    catalog: Number,
+    cntRead: Number,
+    cntComment: Number
 }, { timestamps: true });
 
 

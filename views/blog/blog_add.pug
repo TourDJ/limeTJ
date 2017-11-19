@@ -1,47 +1,57 @@
 extends ../layout
 
 block content
-	.col-lg-12#blog-title
+	.col-sm-12#blog-title
 		h1
 			span 写日志
 	.row
-		.col-lg-offset-2.col-lg-8
+		.col-sm-offset-2.col-sm-8
 			form.form-horizontal
 				.form-group
-					label.col-lg-2.control-label(for="blogTitle") 标题
-					.col-lg-10
-						input.form-control#blogTitle(type="text", name="title", placeholder="标题")
+					label.col-sm-2
+					.col-sm-4
+						input.form-control(type="hidden", id="creator", name="creator", value="0")
+						input.form-control(type="hidden", id="labels", name="labels", value="0")
+						input.form-control(type="hidden", id="open", name="open", value="0")
+						//- input.form-control(type="text", id="catalog", name="catalog", value="0")
 				.form-group
-					label.col-lg-2.control-label(for="blogDate") 日期
-					.col-lg-4
-						input.form-control#datetimepicker(type="text", name="date", placeholder="日期")
+					label.col-sm-2.control-label(for="blogTitle") 标题：
+					.col-sm-10
+						input.form-control.blogInput#blogTitle(type="text", name="title", placeholder="日志标题")
 				.form-group
-					label.col-lg-2.control-label(for="blogLang") 标签
-					.col-lg-10
-						each lang in langs
-							.col-lg-3
-								.checkbox
-									label
-										input(type="checkbox") 
-										| #{lang}
+					label.col-sm-2.control-label(for="blogDate") 日期：
+					.col-lg-4.col-sm-5
+						input.form-control.blogInput#blogDate(type="date", name="createDate", placeholder="日志写作日期")
 				.form-group
-					label.col-lg-2.control-label(for="blogContent") 内容
-					.col-lg-10
-						textarea.form-control#blogContent(name="content", rows="10", placeholder="日志内容")
+					label.col-sm-2.control-label 特性：
+					.col-sm-6
+						each val, key in open
+							.radio.col-sm-6.blog-item
+								label 
+									input.blog-radio(type="radio" name="open" value=val.id)
+									| #{val.name}
 				.form-group
-					.col-lg-offset-2.col-lg-10
-						button.btn.btn-primary#btnSaveBlog(type="button") 确定
+					label.col-sm-2.control-label(for="blogType") 分类：
+					.col-lg-2.col-sm-4
+						select.form-control.blogSelect(name="catalog")
+							option(value="0") 选择分类
+							each val, key in types
+								option(value=val.id)= val.name					
+				.form-group
+					label.col-sm-2.control-label(for="blogLang") 标签：
+					.col-sm-10
+						each val, key in langs							
+							.checkbox.col-sm-3.blog-item
+								label
+									- let name = "lang" + val.id
+									input.blog-check(type="checkbox", name=name, id=name, value=val.id) 
+									| #{val.name}
+				.form-group
+					label.col-sm-2.control-label(for="blogContent") 内容：
+					.col-sm-10
+						textarea.form-control.blogInput#blogContent(name="content", rows="10", placeholder="日志内容")
+				.form-group
+					.col-sm-offset-2.col-sm-10
+						button.btn.btn-primary#btnSaveBlog(type="button") 确&nbsp;&nbsp;定
 block script	
 	script(src="/js/blog.js")
-	//- .row
-	//- 	.modal.fade#add(tabindex="-1", role="dialog", aria-labelledby="myModalLabel")
-	//- 		.modal-dialog(role="document")
-	//- 			.modal-content
-	//- 				.modal-header
-	//- 					button.close(type="button" data-dismiss="modal" aria-label="Close")
-	//- 						span(aria-hidden="true") &times;
-	//- 					h4.modal-title#myModalLabel Modal title
-	//- 				.modal-body
-	//- 					span abc
-	//- 				.modal-footer
-	//- 					button.btn.btn-primary(type="button") 保 存			
