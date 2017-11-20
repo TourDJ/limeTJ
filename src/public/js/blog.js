@@ -6,6 +6,8 @@ $(document).ready(function() {
         .submit();
     });
 
+    $('#editor').wysiwyg();
+
     $("#btnSaveBlog").on("click", function(event) {
         let form = $(this).parents("form");
         
@@ -39,7 +41,7 @@ $(document).ready(function() {
             flag = false;
 
 
-        if(!radioCheckBox(form, "blog-check", "blog-item", 2))
+        if(!radioCheckBox(form, "blog-check", "blog-item2", 2))
             flag = false;
 
         form.find(".blogSelect").each(function( index ) {
