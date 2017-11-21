@@ -17,15 +17,22 @@ block content
 					.input-group#blog-add
 						button.btn.btn-default.btn-lg#btnAddBlog(type="button") 写 博 客
 		each blog in blogs
-			.row.blog-box
-				.blog-title 
-					span.col-lg-8 #{blog.title}
-					span.col-lg-2 aa
-					span.col-lg-2 bb
-				.blog-content 
-					div.col-lg-12 #{blog.article}
-				.blog-foot
-					span.col-lg-12 abc
+			//- .row.blog-box
+			//- 	.blog-title 
+			//- 		span.col-lg-8 #{blog.title}
+			//- 		span.col-lg-2 aa
+			//- 		span.col-lg-2 bb
+			//- 	.blog-content 
+			//- 		div.col-lg-12 #{blog.article}
+			//- 	.blog-foot
+			//- 		span.col-lg-12 abc
+			.panel.panel-success
+				.panel-heading
+					span #{blog.title}
+				.panel-body
+					span #{blog.article}
+				.panel-footer
+					span lllll
 	.col-md-2#blog-right
 		div aaaa
 block script	

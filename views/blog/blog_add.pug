@@ -13,11 +13,14 @@ block content
 						input.form-control(type="hidden", id="creator", name="creator", value="0")
 						input.form-control(type="hidden", id="labels", name="labels", value="0")
 						input.form-control(type="hidden", id="open", name="open", value="0")
-						//- input.form-control(type="text", id="catalog", name="catalog", value="0")
 				.form-group
 					label.col-sm-2.control-label(for="blogTitle") 标题：
 					.col-sm-10
 						input.form-control.blogInput#blogTitle(type="text", name="title", placeholder="日志标题")
+				.form-group
+					label.col-sm-2.control-label(for="blogKeyword") 关键词：
+					.col-sm-10
+						input.form-control.blogInput#blogKeyword(type="text", name="keyword", placeholder="关键词")
 				.form-group
 					label.col-sm-2.control-label(for="blogDate") 日期：
 					.col-lg-4.col-sm-5

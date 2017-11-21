@@ -6,8 +6,6 @@ $(document).ready(function() {
         .submit();
     });
 
-    $('#editor').wysiwyg();
-
     $("#btnSaveBlog").on("click", function(event) {
         let form = $(this).parents("form");
         
