@@ -6,16 +6,12 @@ export type BlogModel = mongoose.Document & {
     article: string,
     createDate: Date,
     creator: string,
-    labels: string,
+    labels: Array<String>,
     open: number,
     catalog: number,
     cntRead: number,
-    cntComment: number
-};
-
-export type LangLabels = {
-    leve: number,
-    name: string
+    cntComment: number,
+    langName: Array<String>
 };
 
 const blogSchema = new mongoose.Schema({

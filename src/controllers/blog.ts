@@ -2,26 +2,73 @@
 
 import { Response, Request, NextFunction } from "express";
 import mUtils from "../utils/commUtils";
-import { default as Blog, BlogModel, LangLabels } from "../models/Blog";
+import { default as Blog, BlogModel } from "../models/Blog";
 import { default as Lang, LangModel } from "../models/Lang";
 import Types, {Open} from "../utils/Types";
+import * as moment from 'moment';
 
 /**
- * 
+ * 博客首页
  * @param req 
  * @param res 
  */
 export let getBlogs = async (req: Request, res: Response) => {
 	const user = req.user;
-	let _blogs;
+	let _blogs: any, _langs: any, lang: any, langObj: any;
 
     if (!user)
         res.redirect("/login");
     else {
-		mUtils.userDefault(user, "profile.name", "解放鞋");
+		mUtils.setDefaultInfo(user);
+
+		_langs = await Lang.find({}, {langId: 1, langName: 1, _id: 0});
+		if(_langs && _langs instanceof Array) {
+			lang = {};
+			_langs.forEach(function(elem: LangModel, index: Number) {
+				if(elem) {
+					lang[elem.langId] = elem;
+				}
+			});
+		}
 		
-		_blogs = await Blog.find().exec();
-		
+		_blogs = await Blog.aggregate(
+			{ 
+				$match : { status: 1 } 
+			},
+			{
+				$project: {
+					"title" : 1, 
+					"article" : 1, 
+					"createDate" : {$dateToString: {format: "%Y-%m-%d %H:%M:%S", date: "$createDate"}}, 
+					"creator" : 1, 
+					"labels" : {$split: ["$labels", ","]}, 
+					"open" : 1, 
+					"catalog" : 1, 
+					"cntRead" : 1, 
+					"cntComment" : 1,  
+					"status" : 1
+				}
+			}
+		);
+		if(lang && _blogs && _blogs instanceof Array) {
+			let _lang_: Array<String>, _langName_: Array<String>;
+			_blogs.forEach(function(blog: BlogModel, index: Number) {
+				if(blog) {
+					_lang_ = blog.labels;
+					_langName_ = [];
+					if(_lang_ && _lang_ instanceof Array){
+						_lang_.forEach(function(str: string) {
+							langObj = lang[str];
+							if(langObj) {
+								_langName_.push(langObj.langName)
+							}
+						});
+					}
+					blog["langName"] = _langName_;
+				}
+			});
+		}
+		console.log(user)
         res.render("blog/blog_index", {
 			title: "blog",
 			blogs: _blogs

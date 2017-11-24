@@ -3,7 +3,7 @@ extends ../layout
 block content
 	.col-lg-12#blog-title
 		h1 
-			span #{user.profile.name} 的博客
+			span #{user.name} 的博客
 	.col-md-10#blog-left
 		.row
 			form.form-inline
@@ -26,14 +26,18 @@ block content
 			//- 		div.col-lg-12 #{blog.article}
 			//- 	.blog-foot
 			//- 		span.col-lg-12 abc
-			.panel.panel-success
+			.panel.panel-info
 				.panel-heading
-					span #{blog.title}
+					.row
+						span.col-sm-6 #{blog.title}
+						span.col-sm-2 #{blog.createDate}
+						span.col-sm-2 #{blog.creator}
 				.panel-body
 					span #{blog.article}
 				.panel-footer
 					span lllll
 	.col-md-2#blog-right
-		div aaaa
+		ul.nav.nav-tabs
+			li.active(role="presentation")
 block script	
 	script(src="/js/blog.js")

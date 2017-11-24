@@ -1,8 +1,13 @@
 
-function userDefault(user: any, args: string, value: string) {
+
+let options = {
+    name: "解放鞋"
+};
+
+function setDefaultInfo(user: any) {
     if (user) {
-        if (!user[args] && value) {
-            user[args] = value;
+        if (!user.name) {
+            user.name = options.name;
         }
     }
 }
@@ -10,7 +15,7 @@ function userDefault(user: any, args: string, value: string) {
 
 
 const mUtils = {
-    userDefault: userDefault
+    setDefaultInfo: setDefaultInfo
 };
 
 export default mUtils;
